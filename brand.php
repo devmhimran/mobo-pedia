@@ -1,3 +1,25 @@
+<?php
+
+    include 'db/db.php';
+    include 'db/function.php';
+    if(isset($_POST['submit'])){
+
+        $brand = $_POST['brand_name'];
+        if(empty($brand)){
+            $valid = "<p style='color:red;'>Field Is Empty</p>";       
+        }else{
+            $sql = " INSERT INTO brand (brand_name) values ('$brand')";
+            $conn -> query($sql);
+            set_msg('Successfully Publish');
+            header("location:brand.php");
+        }
+        
+    }
+
+    
+    
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +42,10 @@
                 <i class="fas fa-mobile me-2"></i>Mobo Pedia</div>
 
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+                <a href="./index.php" class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                 </a>
-                <a href="./analytics.html" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <a href="./analytics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-chart-line me-2"></i>Analytics
                 </a>
                 <div class="dropdown">
@@ -31,8 +53,8 @@
                     <i class="far fa-list-alt me-2"></i>Post
                 </a>
                     <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="./add-post.html">Add Post</a></li>
-                      <li><a class="dropdown-item" href="./all-post.html">All Post</a></li>
+                      <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
+                      <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
@@ -40,11 +62,11 @@
                         <i class="far fa-list-alt me-2"></i>Phone
                     </a>
                         <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton2">
-                          <li><a class="dropdown-item" href="./add-phone.html">Add Phone</a></li>
-                          <li><a class="dropdown-item" href="./all-phones.html">All Phones</a></li>
+                          <li><a class="dropdown-item" href="./add-phone.php">Add Phone</a></li>
+                          <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
                         </ul>
                       </div>
-                    <a href="./brand.html" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <a href="./brand.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i class="fas fa-tags me-2"></i>Brand
                     </a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
@@ -90,18 +112,26 @@
 
 
             <!-- Main Content Start -->
+            <?php get_msg(); ?>
             <div class="brand m-3">
                 <div class="row m-3"> 
                     <div class="col-5 ">
-                        <form action="">
+                        <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
                             <h2 class="mb-3">Add Brand</h2>
-                            <input type="email" class="form-control mb-3 w-75" id="exampleFormControlInput1" placeholder="Type Brand Name">
-                            <input type="submit" class="btn btn-primary" value="Publish">
+                            <input type="text" class="form-control mb-3 w-75" id="exampleFormControlInput1" placeholder="Type Brand Name" name="brand_name">
+                            <small>
+                            <?php if(isset($valid)){
+                                echo $valid;
+                            } ?>
+                            </small>
+                            <input type="submit" class="btn btn-primary" value="Publish" name="submit">
                         </form>
                     </div>
                     <div class="col-6">
                         <table class="table">
                             <thead class="table-dark">
+
+                            
                               <tr>
                                 <th scope="col">Brand Id</th>
                                 <th scope="col">Brand Name</th>
@@ -110,34 +140,25 @@
                               </tr>
                             </thead>
                             <tbody>
+                            
+                            <?php
+                                $all_brand_name = "SELECT * FROM brand";
+                                $brand_data = $conn -> query($all_brand_name);
+                                while($fetch_brand_data = $brand_data -> fetch_assoc()):
+                            ?>
+
                               <tr>
-                                <th scope="row">1</th>
-                                <td>Apple</td>
+                                <th scope="row"><?php echo $fetch_brand_data['id']?></th>
+                                <td><?php echo $fetch_brand_data['brand_name'] ?></td>
                                 <td>
                                     <a href="#" class="btn btn-outline-primary btn-sm">View</a>
-                                    <a href="#" class="btn btn-outline-warning btn-sm">Update</a>
+                                    <a href="brand-update.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-warning btn-sm">Update</a>
                                     <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>                     
                                 </td>
-                                <td>23/07/2021</td>
+                                <td><?php echo  $fetch_brand_data['created_at'] ?></td>
                               </tr>
                               <tr>
-                                <th scope="row">2</th>
-                                <td>Xiaomi</td>
-                                <td><a href="#" class="btn btn-outline-primary btn-sm">View</a>
-                                    <a href="#" class="btn btn-outline-warning btn-sm">Update</a>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
-                                </td>
-                                <td>23/07/2021</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Samsung</td>
-                                <td><a href="#" class="btn btn-outline-primary btn-sm">View</a>
-                                    <a href="#" class="btn btn-outline-warning btn-sm">Update</a>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
-                                </td>
-                                <td>23/07/2021</td>
-                              </tr>
+                                <?php endwhile; ?>
                             </tbody>
                           </table>
                     </div>
