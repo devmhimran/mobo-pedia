@@ -5,9 +5,14 @@
     if(isset($_POST['submit'])){
 
         $brand = $_POST['brand_name'];
+        $unique_brand_check = unique_check($conn, 'brand_name', 'brand',$brand);
+
         if(empty($brand)){
             $valid = "<p style='color:red;'>Field Is Empty</p>";       
-        }else{
+        }elseif($unique_brand_check == false){
+            $valid = "<p style='color:red;'>Already Exists</p>";
+        }
+        else{
             $sql = " INSERT INTO brand (brand_name) values ('$brand')";
             $conn -> query($sql);
             set_msg('Successfully Publish');

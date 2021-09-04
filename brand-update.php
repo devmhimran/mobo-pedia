@@ -10,7 +10,7 @@
     if(isset($_POST['submit'])){
 
         $brand_name = $_POST['brand_name'];
-        $unique_brand_check = unique_check($conn, 'brand_name', 'brand',$brand_name);
+        $unique_brand_check = unique_check($conn,'brand_name','brand',$brand_name);
 
         if(empty($brand_name)){
             $valid = "<p style='color:red;'>Field Is Empty</p>";
