@@ -95,15 +95,15 @@
                 <div class="form-group m-5">
                     <div class="add-post-section mt-3 mb-3">
                         <label class="h2">Post Title</label>
-                        <input type="email" class="form-control mt-2" id="exampleFormControlInput1" >
+                        <input type="email" class="form-control mt-2" id="exampleFormControlInput1" name="post_title">
                     </div>
                     <label class="h2 mt-4">Post Description</label>
-                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="editor" id=editor></textarea> <!-- CKEditor  !-->
+                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post-editor" id=editor></textarea> <!-- CKEditor  !-->
                     <div class="mt-3 mb-3">
                         <label for="formFile" class="form-label">Featured Image</label>
                         <input class="form-control w-25" type="file" id="formFile">
                     </div>
-                    <button class="btn btn-primary mt-3">Publish</button>
+                    <input class="btn btn-primary mt-3" type="submit" name="post_submit" value="Publish">
                 </div>
                 
             </form>

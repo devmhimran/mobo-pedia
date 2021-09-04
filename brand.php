@@ -158,7 +158,7 @@
                                 <td>
                                     <a href="#" class="btn btn-outline-primary btn-sm">View</a>
                                     <a href="brand-update.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-warning btn-sm">Update</a>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>                     
+                                    <a href="./brand-delete.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-danger btn-sm">Delete</a>                     
                                 </td>
                                 <td><?php echo  $fetch_brand_data['created_at'] ?></td>
                               </tr>
