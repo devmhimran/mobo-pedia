@@ -1,3 +1,10 @@
+<?php
+    include 'db/db.php';
+    include 'db/function.php';
+
+  
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,39 +110,23 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <?php
+                              $all_post = "SELECT * FROM post";
+                              $post_data = $conn -> query($all_post);
+                              while($fetch_post_data = $post_data -> fetch_assoc()):
+                        ?>
                       <tr>
-                        <th scope="row">1</th>
-                        <td colspan="2"> New Post number oneNew Post number oneNew Post number oneNew Post number one</td>
+                        <th scope="row"><?php echo $fetch_post_data['post_id'] ?></th>
+                        <td colspan="2"><?php echo $fetch_post_data['post_title'] ?></td>
                         <td>
                             <button class="btn btn-outline-primary btn-sm">View</button>
                             <button class="btn btn-outline-warning btn-sm">Update</button>
                             <button class="btn btn-outline-danger btn-sm">Delete</button>
                         </td>
                         <td>Tech</td>
-                        <td>23/04/2021</td>
+                        <td><?php echo $fetch_post_data['created_at'] ?></td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td colspan="2">New Post number two</td>
-                        <td>
-                            <button class="btn btn-outline-primary btn-sm">View</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
-                        </td>
-                        <td>Tech</td>
-                        <td>23/04/2021</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">New Post number Three</td>
-                        <td>
-                            <button class="btn btn-outline-primary btn-sm">View</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
-                        </td>
-                        <td>Tech</td>
-                        <td>23/04/2021</td>
-                      </tr>
+                        <?php endwhile; ?>
                     </tbody>
                   </table>
             </div>

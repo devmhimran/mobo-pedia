@@ -1,3 +1,34 @@
+<?php
+
+    include 'db/db.php';
+    include 'db/function.php';
+
+    $valid[] ='';
+    if(isset($_POST['post_submit'])){
+
+        $post_title = $_POST['post_title'];
+        $post_content = $_POST['post_content'];
+
+        if(empty($post_title) || empty($post_content)){
+            $valid[] = "<p class='alert alert-danger px-5 p-3'>All Fields Required</p>";      
+        }else{
+
+            // Photo validation + Upload DataBase
+           // -----------------------------------
+            $data = photo_upload($_FILES['featured_photo'],'assets/post/');
+            $photo_data = $data['file_name'];
+            if ( $data['status'] == 'yes' ) {
+
+                $sql = "INSERT INTO post (post_title, post_content, featured_photo) values ('$post_title ','$post_content','$photo_data')";
+                $conn -> query($sql);
+               set_msg('Successfully Publish');
+               header("location: add-post.php");
+           }
+        }
+        
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +73,7 @@
                     </a>
                         <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton2">
                           <li><a class="dropdown-item" href="./add-phone.php">Add Phone</a></li>
+                          <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
                           <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
                         </ul>
                       </div>
@@ -91,17 +123,27 @@
 
 
             <!-- Main Content Start -->
-            <form action="">
+            <?php
+
+            if ( count($valid)>0) {
+                foreach ($valid as $v) {
+                echo $v;
+                }
+            }
+            get_msg();
+            ?>
+
+            <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
                 <div class="form-group m-5">
                     <div class="add-post-section mt-3 mb-3">
                         <label class="h2">Post Title</label>
-                        <input type="email" class="form-control mt-2" id="exampleFormControlInput1" name="post_title">
+                        <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="post_title">
                     </div>
                     <label class="h2 mt-4">Post Description</label>
-                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post-editor" id=editor></textarea> <!-- CKEditor  !-->
+                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post_content" id=editor></textarea> <!-- CKEditor  !-->
                     <div class="mt-3 mb-3">
-                        <label for="formFile" class="form-label">Featured Image</label>
-                        <input class="form-control w-25" type="file" id="formFile">
+                        <label for="formFile" class="form-label">Featured Image Height 350 * Width 450</label>
+                        <input class="form-control w-25" type="file" id="formFile" name="featured_photo">
                     </div>
                     <input class="btn btn-primary mt-3" type="submit" name="post_submit" value="Publish">
                 </div>
