@@ -2,22 +2,8 @@
     include 'db/db.php';
     include 'db/function.php';
 
-  
-
+    include './header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="./assets/css/dashboard/dashboard.css" />
-    <title>All Post</title>
-</head>
-
 <body>
      <!-- Sidebar Start-->
      <div class="d-flex" id="wrapper">
@@ -40,6 +26,7 @@
                     <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
                       <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
+                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
@@ -119,9 +106,9 @@
                         <th scope="row"><?php echo $fetch_post_data['post_id'] ?></th>
                         <td colspan="2"><?php echo $fetch_post_data['post_title'] ?></td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm">View</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            <a class="btn btn-outline-primary btn-sm">View</a>
+                            <a class="btn btn-outline-warning btn-sm">Update</a>
+                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td>Tech</td>
                         <td><?php echo $fetch_post_data['created_at'] ?></td>
@@ -132,8 +119,18 @@
             </div>
             <!-- Main Content End -->
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+            <?php include './footer.php'; ?>
+    <script>	
+        $('a#date_delete').click(function(){
+            let val = confirm('Are You Want To Delete ?');
+
+            if( val == true){
+                return true;
+            }else{
+                return false;
+            }	
+        });
+	</script>
 </body>
 
 </html>

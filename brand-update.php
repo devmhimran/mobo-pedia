@@ -6,7 +6,7 @@
     $sql = "SELECT * FROM brand WHERE id='$id'";
     $data = $conn -> query($sql);
     $fetch_data = $data -> fetch_assoc();
-
+    $unique_brand_check = [''];
     if(isset($_POST['submit'])){
 
         $brand_name = $_POST['brand_name'];
@@ -28,23 +28,9 @@
         $brand = $_POST['brand_name'];
         $sql = "SELECT * FROM brand WHERE id='$id'";
         $conn -> query($sql);
-        set_msg('Successfully Upadet');
-        // header("location:brand.php");
     }
+    include './header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="./assets/css/dashboard/dashboard.css" />
-    <title>All Post</title>
-</head>
-
 <body>
      <!-- Sidebar Start-->
      <div class="d-flex" id="wrapper">
@@ -67,6 +53,7 @@
                     <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
                       <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
+                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
@@ -140,6 +127,11 @@
                                 } ?>
                             </small>
                             <input type="submit" class="btn btn-success" value="Update" name="submit">
+                            <?php
+                                    if($unique_brand_check == false){
+                                       echo  '<a href="./brand.php" class="btn btn-outline-primary">Back</a>';
+                                    }
+                                    ?> 
                         </form>
                     </div>
                     <div class="col-6">
@@ -181,8 +173,18 @@
             </div>
             <!-- Main Content End -->
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+            <?php include './footer.php'; ?>
+    <script>	
+        $('a#date_delete').click(function(){
+            let val = confirm('Are You Want To Delete ?');
+
+            if( val == true){
+                return true;
+            }else{
+                return false;
+            }	
+        });
+	</script>
 </body>
 
 </html>

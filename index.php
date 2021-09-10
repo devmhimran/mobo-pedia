@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="./assets/css/dashboard/dashboard.css" />
-    <title>Dashboard</title>
-</head>
-
+<?php 
+    include './header.php';
+?>
 <body>
     <!-- Sidebar Start-->
     <div class="d-flex" id="wrapper">
@@ -33,6 +23,7 @@
                     <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
                       <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
+                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
@@ -230,8 +221,7 @@
     <!-- Main Content End -->
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <?php include './footer.php'; ?>
 </body>
 
 </html>

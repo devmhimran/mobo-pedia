@@ -20,24 +20,8 @@
         }
         
     }
-
-    
-    
-
+    include './header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="./assets/css/dashboard/dashboard.css" />
-    <title>All Post</title>
-</head>
-
 <body>
      <!-- Sidebar Start-->
      <div class="d-flex" id="wrapper">
@@ -60,6 +44,7 @@
                     <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
                       <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
+                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
@@ -124,12 +109,14 @@
                         <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
                             <h2 class="mb-3">Add Brand</h2>
                             <input type="text" class="form-control mb-3 w-75" id="exampleFormControlInput1" placeholder="Type Brand Name" name="brand_name">
+                            
                             <small>
                             <?php if(isset($valid)){
                                 echo $valid;
                             } ?>
                             </small>
                             <input type="submit" class="btn btn-primary" value="Publish" name="submit">
+                            
                         </form>
                     </div>
                     <div class="col-6">
@@ -158,7 +145,8 @@
                                 <td>
                                     <a href="#" class="btn btn-outline-primary btn-sm">View</a>
                                     <a href="brand-update.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-warning btn-sm">Update</a>
-                                    <a href="./brand-delete.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-danger btn-sm">Delete</a>                     
+                                    <a id="date_delete" href="./brand-delete.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-danger btn-sm">Delete</a>
+                                                       
                                 </td>
                                 <td><?php echo  $fetch_brand_data['created_at'] ?></td>
                               </tr>
@@ -171,8 +159,18 @@
             </div>
             <!-- Main Content End -->
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <?php include './footer.php'; ?>
+    <script>	
+        $('a#date_delete').click(function(){
+            let val = confirm('Are You Want To Delete ?');
+
+            if( val == true){
+                return true;
+            }else{
+                return false;
+            }	
+        });
+	</script>
 </body>
 
 </html>

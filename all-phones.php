@@ -33,6 +33,7 @@
                     <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
                       <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
+                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
@@ -107,9 +108,9 @@
                         <th scope="row">1</th>
                         <td colspan="1"> New Post number oneNew Post number oneNew Post number oneNew Post number one</td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm">View</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            <a class="btn btn-outline-primary btn-sm">View</a>
+                            <a class="btn btn-outline-warning btn-sm">Update</a>
+                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td>Tech</td>
                         <td>23/04/2021</td>
@@ -118,9 +119,9 @@
                         <th scope="row">2</th>
                         <td colspan="1">New Post number two</td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm">View</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            <a class="btn btn-outline-primary btn-sm">View</a>
+                            <a class="btn btn-outline-warning btn-sm">Update</a>
+                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td>Tech</td>
                         <td>23/04/2021</td>
@@ -129,9 +130,9 @@
                         <th scope="row">3</th>
                         <td colspan="1">New Post number Three</td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm">View</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            <a class="btn btn-outline-primary btn-sm">View</a>
+                            <a class="btn btn-outline-warning btn-sm">Update</a>
+                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td>Tech</td>
                         <td>23/04/2021</td>
@@ -141,8 +142,18 @@
             </div>
             <!-- Main Content End -->
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+            <?php include './footer.php'; ?>
+    <script>	
+        $('a#date_delete').click(function(){
+            let val = confirm('Are You Want To Delete ?');
+
+            if( val == true){
+                return true;
+            }else{
+                return false;
+            }	
+        });
+	</script>
 </body>
 
 </html>
