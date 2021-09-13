@@ -101,7 +101,7 @@
                               $all_post = "SELECT * FROM post";
                               $post_data = $conn -> query($all_post);
                               while($fetch_post_data = $post_data -> fetch_assoc()):
-                        ?>
+                    ?>
                       <tr>
                         <th scope="row"><?php echo $fetch_post_data['post_id'] ?></th>
                         <td colspan="2"><?php echo $fetch_post_data['post_title'] ?></td>
@@ -110,7 +110,7 @@
                             <a class="btn btn-outline-warning btn-sm">Update</a>
                             <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
-                        <td>Tech</td>
+                        <td><?php echo $fetch_post_data['category'] ?></td>
                         <td><?php echo $fetch_post_data['created_at'] ?></td>
                       </tr>
                         <?php endwhile; ?>

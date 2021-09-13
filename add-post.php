@@ -8,6 +8,7 @@
 
         $post_title = $_POST['post_title'];
         $post_content = $_POST['post_content'];
+        $post_category = $_POST['category'];
 
         if(empty($post_title) || empty($post_content)){
             $valid[] = "<p class='alert alert-danger px-5 p-3'>All Fields Required</p>";      
@@ -19,7 +20,7 @@
             $photo_data = $data['file_name'];
             if ( $data['status'] == 'yes' ) {
 
-                $sql = "INSERT INTO post (post_title, post_content, featured_photo) values ('$post_title ','$post_content','$photo_data')";
+                $sql = "INSERT INTO post (post_title, post_content, featured_photo,category) values ('$post_title ','$post_content','$photo_data','$post_category')";
                 $conn -> query($sql);
                set_msg('Successfully Published');
                header("location: add-post.php");
@@ -60,7 +61,6 @@
                     </a>
                         <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton2">
                           <li><a class="dropdown-item" href="./add-phone.php">Add Phone</a></li>
-                          <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
                           <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
                         </ul>
                       </div>
@@ -129,6 +129,16 @@
                     <label class="h2 mt-4">Post Description</label>
                     <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post_content" id=editor></textarea> <!-- CKEditor  !-->
                     <div class="mt-3 mb-3">
+                        <select class="form-select w-25" aria-label="Default select example" name="category">
+                            <option selected>Select Category</option>
+                            <?php
+                              $all_category = "SELECT category_name FROM post_category";
+                              $all_category_data = $conn -> query($all_category);
+                              while($fetch_category_data = $all_category_data -> fetch_assoc()):
+                            ?>
+                            <option value="<?php echo $fetch_category_data['category_name'] ?>"><?php echo $fetch_category_data['category_name'] ?></option>
+                            <?php endwhile ?>
+                        </select>
                         <label for="formFile" class="form-label">Featured Image Height 350 * Width 450</label>
                         <input class="form-control w-25" type="file" id="formFile" name="featured_photo">
                     </div>
