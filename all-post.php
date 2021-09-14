@@ -107,8 +107,8 @@
                         <td colspan="2"><?php echo $fetch_post_data['post_title'] ?></td>
                         <td>
                             <a class="btn btn-outline-primary btn-sm">View</a>
-                            <a class="btn btn-outline-warning btn-sm">Update</a>
-                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
+                            <a class="btn btn-outline-warning btn-sm" href="all-post-update.php?id=<?php echo $fetch_post_data['post_id'] ?>">Update</a>
+                            <a id="data_delete" href="all-post-delete.php?id=<?php echo $fetch_post_data['post_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td><?php echo $fetch_post_data['category'] ?></td>
                         <td><?php echo $fetch_post_data['created_at'] ?></td>
@@ -121,7 +121,7 @@
     
             <?php include './footer.php'; ?>
     <script>	
-        $('a#date_delete').click(function(){
+        $('a#data_delete').click(function(){
             let val = confirm('Are You Want To Delete ?');
 
             if( val == true){

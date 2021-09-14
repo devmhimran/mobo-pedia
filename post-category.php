@@ -145,10 +145,10 @@
                                 <td><?php echo $fetch_category_data['category_name'] ?></td>
                                 <td>
                                     <a href="#" class="btn btn-outline-primary btn-sm">View</a>
-                                    <a href="brand-update.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-warning btn-sm">Update</a>
-                                    <a id="delete_data" href="./brand-delete.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-danger btn-sm">Delete</a>                     
+                                    <a href="post-category-update.php?id=<?php echo $fetch_category_data['category_id']?>" class="btn btn-outline-warning btn-sm">Update</a>
+                                    <a id="delete_data" href="post-category-delete.php?id=<?php echo $fetch_category_data['category_id']?>" class="btn btn-outline-danger btn-sm">Delete</a>                     
                                 </td>
-                                <td><?php echo  $fetch_category_data['created_at'] ?></td>
+                                <td><?php echo $fetch_category_data['created_at'] ?></td>
                               </tr>
                               <tr>
                                 <?php endwhile; ?>
@@ -160,6 +160,17 @@
             <!-- Main Content End -->
     
             <?php include './footer.php'; ?>
+            <script>	
+        $('a#delete_data').click(function(){
+            let val = confirm('Are You Want To Delete ?');
+
+            if( val == true){
+                return true;
+            }else{
+                return false;
+            }	
+        });
+	</script>
 </body>
 
 </html>

@@ -2,33 +2,33 @@
 
     include 'db/db.php';
     include 'db/function.php';
+    $id = $_GET['id'];
+    // $category_name = $_POST['category_name'];
+    $category_name_sql = "SELECT * FROM post_category WHERE category_id='$id'";
+    $category_data = $conn -> query($category_name_sql);
+    $fetch_category_data = $category_data -> fetch_assoc();
+    if(isset($_POST['submit'])){
 
-    $valid[] ='';
-    if(isset($_POST['post_submit'])){
+        $category = $_POST['category_name'];
+        $unique_brand_check = unique_check($conn, 'category_name', 'post_category',$category);
 
-        $post_title = $_POST['post_title'];
-        $post_content = $_POST['post_content'];
-        $post_category = $_POST['category'];
-
-        if(empty($post_title) || empty($post_content)){
-            $valid[] = "<p class='alert alert-danger px-5 p-3'>All Fields Required</p>";      
-        }else{
-
-            // Photo validation + Upload DataBase
-           // -----------------------------------
-            $data = photo_upload($_FILES['featured_photo'],'assets/post/');
-            $photo_data = $data['file_name'];
-            if ( $data['status'] == 'yes' ) {
-
-                $sql = "INSERT INTO post (post_title, post_content, featured_photo,category) values ('$post_title ','$post_content','$photo_data','$post_category')";
-                $conn -> query($sql);
-               set_msg('Successfully Published');
-               header("location: add-post.php");
-           }
+        if(empty($category)){
+            $valid = "<p style='color:red;'>Field Is Empty</p>";       
+        }elseif($unique_brand_check == false){
+            $valid = "<p style='color:red;'>Already Exists</p>";
+        }
+        else{
+            $sql = "UPDATE post_category SET category_name = '$category' WHERE category_id = '$id';";
+            $conn -> query($sql);
+            set_msg('Successfully Publish');
+            header("location:post-category.php");
         }
         
     }
+
+    
     include './header.php';
+
 ?>
 <body>
      <!-- Sidebar Start-->
@@ -110,44 +110,72 @@
 
 
             <!-- Main Content Start -->
-            <?php
-
-            if ( count($valid)>0) {
-                foreach ($valid as $v) {
-                echo $v;
-                }
-            }
-            get_msg();
-            ?>
-
-            <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
-                <div class="form-group m-5">
-                    <div class="add-post-section mt-3 mb-3">
-                        <label class="h2">Post Title</label>
-                        <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="post_title">
+            <?php get_msg(); ?>
+            <div class="brand m-3">
+                <div class="row m-3"> 
+                    <div class="col-5 ">
+                        <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
+                            <h2 class="mb-3">Add Category</h2>
+                            <input type="text" class="form-control mb-3 w-75" id="exampleFormControlInput1" placeholder="Type Category Name" name="category_name" value="<?php echo $fetch_category_data['category_name'] ?>">
+                            <small>
+                            <?php if(isset($valid)){
+                                echo $valid;
+                            } ?>
+                            </small>
+                            <input type="submit" class="btn btn-primary" value="Publish" name="submit">
+                        </form>
                     </div>
-                    <label class="h2 mt-4">Post Description</label>
-                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post_content" id=editor></textarea> <!-- CKEditor  !-->
-                    <div class="mt-3 mb-3">
-                        <select class="form-select w-25 mb-4" aria-label="Default select example" name="category">
-                            <option selected>Select Category</option>
+                    <div class="col-6">
+                        <table class="table">
+                            <thead class="table-dark">
+
+                            
+                              <tr>
+                                <th scope="col">Category Id</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">status</th>
+                                <th scope="col">Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            
                             <?php
-                              $all_category = "SELECT category_name FROM post_category";
-                              $all_category_data = $conn -> query($all_category);
-                              while($fetch_category_data = $all_category_data -> fetch_assoc()):
+                                $all_category_name = "SELECT * FROM post_category";
+                                $category_data = $conn -> query($all_category_name);
+                                while($fetch_category_data = $category_data -> fetch_assoc()):
                             ?>
-                            <option value="<?php echo $fetch_category_data['category_name'] ?>"><?php echo $fetch_category_data['category_name'] ?></option>
-                            <?php endwhile ?>
-                        </select>
-                        <label for="formFile" class="form-label">Featured Image Height 350 * Width 450</label>
-                        <input class="form-control w-25" type="file" id="formFile" name="featured_photo">
-                    </div>
-                    <input class="btn btn-primary mt-3" type="submit" name="post_submit" value="Publish">
-                </div>
-                
-            </form>
-            <!-- Main Content End -->
 
+                              <tr>
+                                <th scope="row"><?php echo $fetch_category_data['category_id']?></th>
+                                <td><?php echo $fetch_category_data['category_name'] ?></td>
+                                <td>
+                                    <a href="#" class="btn btn-outline-primary btn-sm">View</a>
+                                    <a href="post-category-update.php?id=<?php echo $fetch_category_data['category_id']?>" class="btn btn-outline-warning btn-sm">Update</a>
+                                    <a id="delete_data" href="post-category-delete.php?id=<?php echo $fetch_category_data['category_id']?>" class="btn btn-outline-danger btn-sm">Delete</a>                     
+                                </td>
+                                <td><?php echo  $fetch_category_data['created_at'] ?></td>
+                              </tr>
+                              <tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Content End -->
+    
             <?php include './footer.php'; ?>
+            <script>	
+        $('a#delete_data').click(function(){
+            let val = confirm('Are You Want To Delete ?');
+
+            if( val == true){
+                return true;
+            }else{
+                return false;
+            }	
+        });
+	</script>
 </body>
+
 </html>

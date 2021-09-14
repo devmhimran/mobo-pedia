@@ -4,6 +4,10 @@
     include 'db/function.php';
 
     $valid[] ='';
+    $id = $_GET['id'];
+    $post_sql = "SELECT * FROM post WHERE post_id='$id'";
+    $post_data = $conn -> query($post_sql);
+    $fetch_post_data = $post_data -> fetch_assoc();
     if(isset($_POST['post_submit'])){
 
         $post_title = $_POST['post_title'];
@@ -19,10 +23,9 @@
             $data = photo_upload($_FILES['featured_photo'],'assets/post/');
             $photo_data = $data['file_name'];
             if ( $data['status'] == 'yes' ) {
-
-                $sql = "INSERT INTO post (post_title, post_content, featured_photo,category) values ('$post_title ','$post_content','$photo_data','$post_category')";
+                $sql = "UPDATE post SET post_title = '$post_title', post_content='$post_content', featured_photo='$photo_data',category='$post_category' WHERE post_id='$id'";
                 $conn -> query($sql);
-               set_msg('Successfully Published');
+               set_msg('Successfully Updated');
                header("location: add-post.php");
            }
         }
@@ -124,25 +127,32 @@
                 <div class="form-group m-5">
                     <div class="add-post-section mt-3 mb-3">
                         <label class="h2">Post Title</label>
-                        <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="post_title">
+                        <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="post_title" value="<?php echo $fetch_post_data['post_title'] ?>">
                     </div>
                     <label class="h2 mt-4">Post Description</label>
-                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post_content" id=editor></textarea> <!-- CKEditor  !-->
+                    <textarea style="width: 100%;" class="ckeditor mt-3 mb-3" name="post_content" id=editor><?php echo $fetch_post_data['post_content'] ?></textarea> <!-- CKEditor  !-->
                     <div class="mt-3 mb-3">
                         <select class="form-select w-25 mb-4" aria-label="Default select example" name="category">
-                            <option selected>Select Category</option>
-                            <?php
+                        <?php
+                              $data_post_category = $fetch_post_data['category'];
                               $all_category = "SELECT category_name FROM post_category";
                               $all_category_data = $conn -> query($all_category);
                               while($fetch_category_data = $all_category_data -> fetch_assoc()):
+                              if($data_post_category == $fetch_category_data['category_name']){
+                                    $select_category = 'selected';
+                                   
+                                }else{
+                                    $select_category = '';
+                                }
                             ?>
-                            <option value="<?php echo $fetch_category_data['category_name'] ?>"><?php echo $fetch_category_data['category_name'] ?></option>
+                            <!-- <option selected>Select Category</option> -->
+                            <option value="<?php echo $fetch_category_data['category_name'];?>" <?php echo $select_category ?> ><?php echo $fetch_category_data['category_name'] ?></option>
                             <?php endwhile ?>
                         </select>
                         <label for="formFile" class="form-label">Featured Image Height 350 * Width 450</label>
                         <input class="form-control w-25" type="file" id="formFile" name="featured_photo">
                     </div>
-                    <input class="btn btn-primary mt-3" type="submit" name="post_submit" value="Publish">
+                    <input class="btn btn-success mt-3" type="submit" name="post_submit" value="Update">
                 </div>
                 
             </form>
