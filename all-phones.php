@@ -1,3 +1,9 @@
+<?php
+
+    include 'db/db.php';
+    include 'db/function.php';
+    include './header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,7 +95,7 @@
                 </div>
             </nav>
 
-
+            
             <!-- Main Content Start -->
             <div class="post-table m-3">
                 <h2>All Phones</h2>
@@ -100,43 +106,30 @@
                         <th scope="col" colspan="1">Phone Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Brand</th>
+                        <th scope="col">Photo</th>
                         <th scope="col">Date</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <?php
+                $all_phone = "SELECT * FROM phone";
+                $phone_data = $conn -> query($all_phone);
+                while($fetch_phone_data = $phone_data -> fetch_assoc()):
+            ?>
                       <tr>
-                        <th scope="row">1</th>
-                        <td colspan="1"> New Post number oneNew Post number oneNew Post number oneNew Post number one</td>
+                        <th scope="row"><?php echo $fetch_phone_data['phone_id'] ?></th>
+                        <td colspan="1"><?php echo $fetch_phone_data['phone_name'] ?></td>
                         <td>
                             <a class="btn btn-outline-primary btn-sm">View</a>
                             <a class="btn btn-outline-warning btn-sm">Update</a>
-                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
+                            <a id="date_delete" href="all-phones-delete.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td>Tech</td>
-                        <td>23/04/2021</td>
+                        <td><img src="./assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="" style="width:30px;"></td>
+                        <td><?php echo $fetch_phone_data['phone_created_at'] ?></td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td colspan="1">New Post number two</td>
-                        <td>
-                            <a class="btn btn-outline-primary btn-sm">View</a>
-                            <a class="btn btn-outline-warning btn-sm">Update</a>
-                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
-                        </td>
-                        <td>Tech</td>
-                        <td>23/04/2021</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td colspan="1">New Post number Three</td>
-                        <td>
-                            <a class="btn btn-outline-primary btn-sm">View</a>
-                            <a class="btn btn-outline-warning btn-sm">Update</a>
-                            <a id="date_delete" class="btn btn-outline-danger btn-sm">Delete</a>
-                        </td>
-                        <td>Tech</td>
-                        <td>23/04/2021</td>
-                      </tr>
+                      <?php endwhile; ?>
+
                     </tbody>
                   </table>
             </div>
