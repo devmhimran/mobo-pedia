@@ -17,20 +17,50 @@
         }elseif($unique_brand_check == false){
             $valid = "<p style='color:red;'>Already Exists</p>";
         }else{
-            $update_sql = "UPDATE brand SET brand_name = '$brand_name' WHERE id = '$id';";
-            $conn -> query($update_sql);
-            set_msg('Brand updated Successfully');
-            header("location: brand.php");
-        }
 
+
+
+            $data = photo_upload($_FILES['brand_logo'],'assets/brand_img/');
+            $photo_data = $data['file_name'];
+            if ( $data['status'] == 'yes' ) {
+
+                $update_sql = "UPDATE brand SET brand_name = '$brand_name',brand_img = '$photo_data'  WHERE id = '$id';";
+                $sql = " INSERT INTO brand (brand_name, brand_img) values ('$brand', '$photo_data')";
+                $conn -> query($update_sql);
+                set_msg('Brand updated Successfully');
+                header("location: brand.php");
+
+
+
+
+
+
+
+
+
+            // $update_sql = "UPDATE brand SET brand_name = '$brand_name' WHERE id = '$id';";
+            // $conn -> query($update_sql);
+            // set_msg('Brand updated Successfully');
+            // header("location: brand.php");
+        }
+    }
 
 
         $brand = $_POST['brand_name'];
         $sql = "SELECT * FROM brand WHERE id='$id'";
         $conn -> query($sql);
     }
-    include './header.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?php include 'enqueue.php' ?>
+    <title>All Brand</title>
+</head>
 <body>
      <!-- Sidebar Start-->
      <div class="d-flex" id="wrapper">
@@ -121,6 +151,7 @@
 
                             ?>
                             <input type="text" class="form-control mb-3 w-75" id="exampleFormControlInput1" placeholder="Type Brand Name" name="brand_name" value="<?php echo $fetch_data['brand_name'] ?>">
+                            <input type="file" class="form-control mb-3 w-75"  name="brand_logo">
                             <small>
                                 <?php if(isset($valid)){
                                     echo $valid;
@@ -141,6 +172,7 @@
                             
                               <tr>
                                 <th scope="col">Brand Id</th>
+                                <th scope="col">Brand Img</th>
                                 <th scope="col">Brand Name</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Date</th>
@@ -151,11 +183,13 @@
                             <?php
                                 $all_brand_name = "SELECT * FROM brand";
                                 $brand_data = $conn -> query($all_brand_name);
+                                $i=1;
                                 while($fetch_brand_data = $brand_data -> fetch_assoc()):
                             ?>
 
                               <tr>
-                                <th scope="row"><?php echo $fetch_brand_data['id']?></th>
+                              <td scope="row"><?php echo $i; $i++; ?></td>
+                                <td scope="row"><img style="width:60px;" src="./assets/brand_img/<?php echo $fetch_brand_data['brand_img']?>" alt=""></td>
                                 <td><?php echo $fetch_brand_data['brand_name'] ?></td>
                                 <td>
                                     <a href="#" class="btn btn-outline-primary btn-sm">View</a>

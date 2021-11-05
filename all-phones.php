@@ -2,7 +2,7 @@
 
     include 'db/db.php';
     include 'db/function.php';
-    include './header.php';
+    include 'route/routes.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,7 +121,7 @@
                         <td colspan="1"><?php echo $fetch_phone_data['phone_name'] ?></td>
                         <td>
                             <a class="btn btn-outline-primary btn-sm">View</a>
-                            <a class="btn btn-outline-warning btn-sm">Update</a>
+                            <a href="all-phones-update.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-warning btn-sm">Update</a>
                             <a id="date_delete" href="all-phones-delete.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
                         <td>Tech</td>

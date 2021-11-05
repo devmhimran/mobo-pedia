@@ -37,6 +37,10 @@
         }
         
     }
+    $id = $_GET['id'];
+    $phone_sql = "SELECT * FROM phone WHERE phone_id='$id'";
+    $phone_data = $conn -> query($phone_sql);
+    $fetch_phone_data = $phone_data -> fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,68 +144,75 @@
                 <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
                     <div class="form-group m-5">
                         <div class="add-post-section mt-3 mb-3">
-                            <label class="h2">Phone Name</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_name">
+                        <label class="h2">Phone Name</label>
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_name" value="<?php echo $fetch_phone_data['phone_name'] ?>">
                         </div>
                         <div class="col-sm-3 mt-3 mb-3">
                             <label class="h5">Brand</label>
                             <select class="form-select" id="specificSizeSelect" name="phone_brand">
-                                <option selected>Choose...</option>
                                 <?php
-                              $all_brand = "SELECT * FROM brand";
-                              $all_brand_data = $conn -> query($all_brand);
-                              while($fetch_brand_data = $all_brand_data -> fetch_assoc()):
-                            ?>
-                            <option value="<?php echo $fetch_brand_data['id'] ?>"><?php echo $fetch_brand_data['brand_name'] ?></option>
+                                $data_phone_brand = $fetch_phone_data['phone_brand']; 
+                                $all_brand = "SELECT * FROM brand ";
+                                $all_brand_data = $conn -> query($all_brand);
+                                while($fetch_brand_data = $all_brand_data -> fetch_assoc()):
+                                    if($data_phone_brand == $fetch_brand_data['id']){
+                                        $select_brand = 'selected';
+                                       
+                                    }else{
+                                        $select_brand = '';
+                                    }
+                                ?>
+                            <option value="<?php echo $fetch_brand_data['brand_name'] ?>" <?php echo $select_brand  ?>><?php echo $fetch_brand_data['brand_name'] ?></option>
                             <?php endwhile ?>
                             </select>
                         </div>
                         <h3>Software</h3>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
-                            <label class="h5">OS</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_os">
+                        <label class="h5">OS</label>
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_os" value="<?php echo $fetch_phone_data['phone_os'] ?>">
                         </div>
                         <h3>Hardware</h3>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Screen</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_screen">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_screen" value="<?php echo $fetch_phone_data['phone_screen'] ?>">
                         </div>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Resolution</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_res">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_res" value="<?php echo $fetch_phone_data['phone_res'] ?>">
                         </div>
                         <h3>Memory</h3>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Ram</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_ram">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_ram" value="<?php echo $fetch_phone_data['phone_ram'] ?>">
                         </div>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Rom</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_rom">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_rom" value="<?php echo $fetch_phone_data['phone_rom'] ?>">
                         </div>
                         <h3>Camera</h3>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Primary</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_cam_primary">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_cam_primary" value="<?php echo $fetch_phone_data['phone_cam_primary'] ?>">
                         </div>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Secondary</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_cam_secondary">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_cam_secondary" value="<?php echo $fetch_phone_data['phone_cam_secondary'] ?>">
                         </div>
                         <h3>Battery</h3>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Capacity</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_battery">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_battery" value="<?php echo $fetch_phone_data['phone_battery'] ?>">
                         </div>
-                        <h3>Battery</h3>
+
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
-                            <label class="h5">Feature Image</label>
+                            <label class="h5">Feature Image</label><br>
+                            <img style="width:100px;" src="./assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="">
                             <input type="file" class="form-control mt-2" id="exampleFormControlInput1" name="phone_img">
                         </div>
                         <hr>

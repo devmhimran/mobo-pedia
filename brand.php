@@ -13,15 +13,29 @@
             $valid = "<p style='color:red;'>Already Exists</p>";
         }
         else{
-            $sql = " INSERT INTO brand (brand_name) values ('$brand')";
-            $conn -> query($sql);
-            set_msg('Successfully Publish');
-            header("location:brand.php");
+            $data = photo_upload($_FILES['brand_logo'],'assets/brand_img/');
+            $photo_data = $data['file_name'];
+            if ( $data['status'] == 'yes' ) {
+
+                $sql = " INSERT INTO brand (brand_name, brand_img) values ('$brand', '$photo_data')";
+                $conn -> query($sql);
+                set_msg('Successfully Publish');
+               header("location:brand.php");
+           }
         }
         
     }
-    include './header.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?php include 'enqueue.php' ?>
+    <title>Brand</title>
+</head>
 <body>
      <!-- Sidebar Start-->
      <div class="d-flex" id="wrapper">
@@ -105,10 +119,11 @@
             <?php get_msg(); ?>
             <div class="brand m-3">
                 <div class="row m-3"> 
-                    <div class="col-5 ">
+                    <div class="col-4 ">
                         <form action="<?php $_SERVER['PHP_SELF']?>" method = "POST" enctype='multipart/form-data'>
                             <h2 class="mb-3">Add Brand</h2>
                             <input type="text" class="form-control mb-3 w-75" id="exampleFormControlInput1" placeholder="Type Brand Name" name="brand_name">
+                            <input type="file" class="form-control mb-3 w-75"  name="brand_logo">
                             
                             <small>
                             <?php if(isset($valid)){
@@ -119,13 +134,14 @@
                             
                         </form>
                     </div>
-                    <div class="col-6">
+                    <div class="col-7">
                         <table class="table">
                             <thead class="table-dark">
 
                             
                               <tr>
                                 <th scope="col">Brand Id</th>
+                                <th scope="col">Brand Image</th>
                                 <th scope="col">Brand Name</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Date</th>
@@ -136,11 +152,13 @@
                             <?php
                                 $all_brand_name = "SELECT * FROM brand";
                                 $brand_data = $conn -> query($all_brand_name);
+                                $i=1;
                                 while($fetch_brand_data = $brand_data -> fetch_assoc()):
                             ?>
 
                               <tr>
-                                <th scope="row"><?php echo $fetch_brand_data['id']?></th>
+                                <td scope="row"><?php echo $i; $i++; ?></td>
+                                <td scope="row"><img style="width:60px;" src="./assets/brand_img/<?php echo $fetch_brand_data['brand_img']?>" alt=""></td>
                                 <td><?php echo $fetch_brand_data['brand_name'] ?></td>
                                 <td>
                                     <a href="#" class="btn btn-outline-primary btn-sm">View</a>

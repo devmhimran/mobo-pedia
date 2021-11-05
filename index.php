@@ -1,6 +1,31 @@
 <?php 
-    include './header.php';
+
+include 'db/db.php';
+include 'db/function.php';
+include 'route/routes.php';
+
+    // session_start();
+      if(!isset($_SESSION['id']) AND !isset($_SESSION['user_name']) AND !isset($_SESSION['user_username'])){
+            header("location:login.php");
+          }
+    
+      if(isset($_GET['logout']) AND $_GET['logout'] == 'user-logout'){
+        session_destroy();
+        setcookie('user_re_log','',time() - (60*60*24*365));
+        header("location:login.php");
+      } 
+      
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?php include 'enqueue.php' ?>
+    <title>Dashboard</title>
+</head>
 <body>
     <!-- Sidebar Start-->
     <div class="d-flex" id="wrapper">
@@ -41,7 +66,7 @@
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i class="fas fa-cog me-2"></i>Settings
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                    <a href="?logout=user-logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                         <i class="fas fa-power-off me-2"></i>Logout
                     </a>
             </div>
@@ -67,12 +92,12 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>John Doe
+                                <i class="fas fa-user me-2"></i><?php echo $_SESSION['user_name']; ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><a href = "?logout=user-logout" class="dropdown-item" href="#">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
