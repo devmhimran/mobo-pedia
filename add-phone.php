@@ -17,9 +17,10 @@
         $phone_cam_secondary = $_POST['phone_cam_secondary'];
         $phone_battery = $_POST['phone_battery'];
         $phone_img = $_FILES['phone_img'];
+        echo $phone_price = $_POST["phone_price"];
 
 
-        if(empty($phone_name) || empty($phone_brand) || empty($phone_os) || empty($phone_screen) || empty($phone_res) || empty($phone_ram) || empty($phone_rom) || empty($phone_cam_primary) || empty($phone_cam_secondary) || empty($phone_battery) || empty($phone_img)){
+        if(empty($phone_name) || empty($phone_brand) || empty($phone_os) || empty($phone_screen) || empty($phone_res) || empty($phone_ram) || empty($phone_rom) || empty($phone_cam_primary) || empty($phone_cam_secondary) || empty($phone_battery) || empty($phone_img) || empty($phone_price)){
             $valid[] = "<p class='alert alert-danger px-5 p-3'>All Fields Required</p>";      
         }else{
 
@@ -29,7 +30,7 @@
             $photo_data = $data['file_name'];
             if ( $data['status'] == 'yes' ) {
 
-                $sql = "INSERT INTO phone (phone_name, 	phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data')";
+                $sql = "INSERT INTO phone (phone_name, 	phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img,phone_price) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data','$phone_price')";
                 $conn -> query($sql);
                set_msg('Successfully Published');
                header("location: add-phone.php");
@@ -204,10 +205,15 @@
                             <label class="h5">Feature Image</label>
                             <input type="file" class="form-control mt-2" id="exampleFormControlInput1" name="phone_img">
                         </div>
+                        <div class="add-post-section w-50 mt-3 mb-3">
+                            <label class="h5">Price</label>
+                            <input type="number" class="form-control mt-2" id="exampleFormControlInput1" name="phone_price">
+                        </div>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <input type="submit" class="btn btn-primary" name="phone_submit" value="Publish">
                         </div>
+                        
                     </div>
                 </form>
             <!-- Main Content End -->

@@ -45,19 +45,7 @@
         <div class="columns">
 
           <!-- -- Card Start -- -->
-          <div class="column is-3">
-            <div class="card  p-4">
-              <div class="card-image">
-                <img src="./assets/img/img.jpg" alt="">
-              </div>
-              <div class="media-content">
-                <p class="title is-5 mt-2">Nokia 210</p>
-                <p class="subtitle is-6 mb-2">Nokia</p>
-                <p class="">BDT 12000</p>
-              </div>
-              <button class="button is-small is-primary mt-3 ">View</button>
-            </div>
-          </div>
+          
           <!-- -- Card End -- -->
 
           <!-- -- Card Start -- -->

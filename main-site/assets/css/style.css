@@ -58,3 +58,7 @@ body {
   .columns{
     flex-wrap: wrap !important;
   }
+  .card-phone-img{
+    width: 200px !important;
+  }
+ 

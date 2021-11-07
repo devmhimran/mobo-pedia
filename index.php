@@ -2,9 +2,9 @@
 
 include 'db/db.php';
 include 'db/function.php';
-include 'route/routes.php';
+// include 'route/routes.php';
 
-    // session_start();
+    session_start();
       if(!isset($_SESSION['id']) AND !isset($_SESSION['user_name']) AND !isset($_SESSION['user_username'])){
             header("location:login.php");
           }
