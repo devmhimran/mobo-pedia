@@ -120,10 +120,18 @@
                             <a class="btn btn-outline-warning btn-sm" href="all-post-update.php?id=<?php echo $fetch_post_data['post_id'] ?>">Update</a>
                             <a id="data_delete" href="all-post-delete.php?id=<?php echo $fetch_post_data['post_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
-                        <td><?php echo $fetch_post_data['category'] ?></td>
+                        <td>
+                            <?php 
+                           $category_id =  $fetch_post_data['category'];
+                           $category = "SELECT category_name FROM post_category WHERE category_id='$category_id'";
+                           $category_data = $conn -> query($category);
+                           $fetch_category_data = $category_data -> fetch_assoc();
+                           echo $fetch_category_data['category_name'];
+                        ?>
+                        </td>
                         <td><?php echo $fetch_post_data['created_at'] ?></td>
                       </tr>
-                        <?php endwhile; ?>
+                        <?php endwhile; ?>           
                     </tbody>
                   </table>
             </div>

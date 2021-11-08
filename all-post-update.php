@@ -144,7 +144,7 @@
                         <select class="form-select w-25 mb-4" aria-label="Default select example" name="category">
                         <?php
                               $data_post_category = $fetch_post_data['category'];
-                              $all_category = "SELECT category_name FROM post_category";
+                              $all_category = "SELECT * FROM post_category";
                               $all_category_data = $conn -> query($all_category);
                               while($fetch_category_data = $all_category_data -> fetch_assoc()):
                               if($data_post_category == $fetch_category_data['category_name']){
@@ -155,7 +155,7 @@
                                 }
                             ?>
                             <!-- <option selected>Select Category</option> -->
-                            <option value="<?php echo $fetch_category_data['category_name'];?>" <?php echo $select_category ?> ><?php echo $fetch_category_data['category_name'] ?></option>
+                            <option value="<?php echo $fetch_category_data['category_id'];?>" <?php echo $select_category ?> ><?php echo $fetch_category_data['category_name'] ?></option>
                             <?php endwhile ?>
                         </select>
                         <label for="formFile" class="form-label">Featured Image Height 350 * Width 450</label>

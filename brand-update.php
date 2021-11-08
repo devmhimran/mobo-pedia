@@ -14,9 +14,11 @@
 
         if(empty($brand_name)){
             $valid = "<p style='color:red;'>Field Is Empty</p>";
-        }elseif($unique_brand_check == false){
-            $valid = "<p style='color:red;'>Already Exists</p>";
-        }else{
+        }
+        // elseif($unique_brand_check == false){
+        //     $valid = "<p style='color:red;'>Already Exists</p>";
+        // }
+        else{
 
 
 

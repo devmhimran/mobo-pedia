@@ -9,7 +9,7 @@ while($fetch_phone_data = $phone_data -> fetch_assoc()):
     ?> 
     <div class="column is-3">
     <div class="card  p-4">
-      <div class="card-image">
+      <div class="card-image has-text-centered ">
         <img  class="card-phone-img" src="../assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="">
       </div>
       <div class="media-content">
