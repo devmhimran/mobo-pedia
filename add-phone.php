@@ -17,7 +17,7 @@
         $phone_cam_secondary = $_POST['phone_cam_secondary'];
         $phone_battery = $_POST['phone_battery'];
         $phone_img = $_FILES['phone_img'];
-        echo $phone_price = $_POST["phone_price"];
+        $phone_price = $_POST["phone_price"];
 
 
         if(empty($phone_name) || empty($phone_brand) || empty($phone_os) || empty($phone_screen) || empty($phone_res) || empty($phone_ram) || empty($phone_rom) || empty($phone_cam_primary) || empty($phone_cam_secondary) || empty($phone_battery) || empty($phone_img) || empty($phone_price)){

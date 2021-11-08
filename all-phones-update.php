@@ -17,7 +17,7 @@
         $phone_cam_secondary = $_POST['phone_cam_secondary'];
         $phone_battery = $_POST['phone_battery'];
         $phone_img = $_FILES['phone_img'];
-
+        $phone_price = $_POST["phone_price"];
 
         if(empty($phone_name) || empty($phone_brand) || empty($phone_os) || empty($phone_screen) || empty($phone_res) || empty($phone_ram) || empty($phone_rom) || empty($phone_cam_primary) || empty($phone_cam_secondary) || empty($phone_battery) || empty($phone_img)){
             $valid[] = "<p class='alert alert-danger px-5 p-3'>All Fields Required</p>";      
@@ -28,8 +28,8 @@
             $data = photo_upload($_FILES['phone_img'],'assets/phone_img/');
             $photo_data = $data['file_name'];
             if ( $data['status'] == 'yes' ) {
-
-                $sql = "INSERT INTO phone (phone_name, 	phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data')";
+                $sql = "UPDATE phone SET phone_name = '$phone_name', phone_brand = '$phone_brand', phone_os = '$phone_os', phone_screen = '$phone_screen', phone_res = '$phone_res', phone_ram = '$phone_ram', phone_rom = '$phone_rom', phone_cam_primary = '$phone_cam_primary', phone_cam_secondary = '$phone_cam_secondary', phone_battery = '$phone_battery', phone_price = '$phone_price'";
+                // $sql = "INSERT INTO phone (phone_name, 	phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data')";
                 $conn -> query($sql);
                set_msg('Successfully Published');
                header("location: add-phone.php");
@@ -162,7 +162,7 @@
                                         $select_brand = '';
                                     }
                                 ?>
-                            <option value="<?php echo $fetch_brand_data['brand_name'] ?>" <?php echo $select_brand  ?>><?php echo $fetch_brand_data['brand_name'] ?></option>
+                            <option value="<?php echo $fetch_brand_data['id'] ?>" <?php echo $select_brand  ?>><?php echo $fetch_brand_data['brand_name'] ?></option>
                             <?php endwhile ?>
                             </select>
                         </div>
@@ -214,6 +214,10 @@
                             <label class="h5">Feature Image</label><br>
                             <img style="width:100px;" src="./assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="">
                             <input type="file" class="form-control mt-2" id="exampleFormControlInput1" name="phone_img">
+                        </div>
+                        <div class="add-post-section w-50 mt-3 mb-3">
+                            <label class="h5">Price</label>
+                            <input type="number" class="form-control mt-2" id="exampleFormControlInput1" name="phone_price"  value="<?php echo $fetch_phone_data['phone_price'] ?>">
                         </div>
                         <hr>
                         <div class="add-post-section w-50 mt-3 mb-3">

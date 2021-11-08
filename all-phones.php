@@ -112,19 +112,28 @@
                     </thead>
                     <tbody>
                     <?php
+                    $i = 1;
                 $all_phone = "SELECT * FROM phone";
                 $phone_data = $conn -> query($all_phone);
                 while($fetch_phone_data = $phone_data -> fetch_assoc()):
             ?>
                       <tr>
-                        <th scope="row"><?php echo $fetch_phone_data['phone_id'] ?></th>
+                        <th scope="row"><?php echo $i; $i++; ?></th>
                         <td colspan="1"><?php echo $fetch_phone_data['phone_name'] ?></td>
                         <td>
                             <a class="btn btn-outline-primary btn-sm">View</a>
                             <a href="all-phones-update.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-warning btn-sm">Update</a>
                             <a id="date_delete" href="all-phones-delete.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
-                        <td>Tech</td>
+                        <td><?php 
+
+                            $brand_id =  $fetch_phone_data['phone_brand'];
+                            $brand = "SELECT brand_name FROM brand WHERE id='$brand_id'";
+                            $brand_data = $conn -> query($brand);
+                            $fetch_brand_data = $brand_data -> fetch_assoc();
+                            echo $fetch_brand_data['brand_name'];
+
+                            ?></td>
                         <td><img src="./assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="" style="width:30px;"></td>
                         <td><?php echo $fetch_phone_data['phone_created_at'] ?></td>
                       </tr>
