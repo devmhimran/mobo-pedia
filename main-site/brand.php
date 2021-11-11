@@ -107,11 +107,7 @@ include './db/db.php';
 
 
 
-
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-    <script src="./assets/js/bulma.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="./assets/js/swiper.js"></script>
+  <?php include './enqueue_script.php'; ?>
 
 </body>
 </html>

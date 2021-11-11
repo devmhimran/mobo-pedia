@@ -23,14 +23,14 @@ include './db/db.php';
         <div class="hero-body has-text-centered	">
           <div class="container">
             <p class="title">
-                Brands
+                Blog Category
               </p>
           </div>
         </div>
     </section>
 
 <section class="third-section container">
-  <div class="columns">
+  <div class="columns py-5">
     <!-- <div class="column is-2">
       <div class="card p-4">
         <aside class="menu">
@@ -59,12 +59,14 @@ include './db/db.php';
 
           <!-- -- Card Start -- -->
           <div class="column is-3">
+          <a href='single-category.php?id=<?php echo $fetch_post_category_data['category_id'] ?>'>
             <div style='height:180px;  display:flex; align-items:center;' class="card  has-text-centered p-4">
               <div style='' class="media-content ">
-                <a href='./single-brand.php?id=<?php echo $fetch_brand_data['id'] ?>'><p class="title is-5 mt-2"><?php echo $fetch_post_category_data['category_name'] ?></p></a>
+                <p class="title post-category-name is-5 mt-2"><?php echo $fetch_post_category_data['category_name'] ?></p>
               </div>
             </div>
           </div>
+          </a>
           <!-- -- Card End -- -->
           <?php endwhile; ?>
 
@@ -103,12 +105,6 @@ include './db/db.php';
 
 
 
-
-
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-    <script src="./assets/js/bulma.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="./assets/js/swiper.js"></script>
-
+  <?php include './enqueue_script.php'; ?>
 </body>
 </html>

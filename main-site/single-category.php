@@ -2,6 +2,11 @@
 
 include './db/db.php';
 include './db/function.php';
+ 
+$id = $_GET['id'];
+$category = "SELECT * FROM post_category WHERE category_id='$id'";
+$category_data = $conn -> query($category);
+$fetch_category_data = $category_data -> fetch_assoc();
 
 ?>
 
@@ -12,7 +17,7 @@ include './db/function.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include './enqueue_style.php' ?>
-    <title>Posts</title>
+    <title><?php echo $fetch_category_data['category_name'] ?></title>
 </head>
 <body>
     
@@ -23,8 +28,8 @@ include './db/function.php';
     <section class="second-section hero is-black py-5">
         <div class="hero-body has-text-centered	">
           <div class="container">
-            <p class="title">
-                Posts
+            <p class="title single-category-hero-title">
+              <?php echo $fetch_category_data['category_name'] ?>
               </p>
           </div>
         </div>
@@ -39,8 +44,8 @@ include './db/function.php';
 
           
           <?php 
-          
-            $all_post = "SELECT * FROM post ORDER BY post_id DESC";
+            $category_id = $fetch_category_data['category_id'];
+            $all_post = "SELECT * FROM post WHERE category = '$category_id' ORDER BY post_id DESC";
             $post_data = $conn -> query($all_post);
             while($fetch_post_data = $post_data -> fetch_assoc()):
 

@@ -1,9 +1,12 @@
+<div class="preloader js-preloader flex-center">
+	<img src="./assets/img/preloader.gif">
+</div>
 <section class="first-section">
       <div class="container py-3">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
               <a class="navbar-item" href="./index.php">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                <img class='site-logo' src="./assets/img/mobo-pedia.png" width="112" height="28">
               </a>
           
               <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -24,7 +27,7 @@
                     <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link mx-2">Blog</a>
                     <div class="navbar-dropdown">
-                        <a href="./blog_category.php" class="navbar-item">Blog Category</a>
+                        <a href="./post-category.php" class="navbar-item">Blog Category</a>
                         <a href="./all_post.php" class="navbar-item">Latest Post <span class="tag is-link ml-3">New</span>
                         </a>
                       </div>

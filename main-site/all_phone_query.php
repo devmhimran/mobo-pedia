@@ -25,7 +25,7 @@ while($fetch_phone_data = $phone_data -> fetch_assoc()):
         ?></p>
         <p class="">BDT <?php echo $fetch_phone_data['phone_price'] ?></p>
       </div>
-      <button class="button is-small is-primary mt-3 ">View</button>
+      <a class="button is-small is-primary mt-3 " href="./single-phone.php?id=<?php echo $fetch_phone_data['phone_id'] ?>">View</a>
     </div>
   </div>
   <?php endwhile; ?>

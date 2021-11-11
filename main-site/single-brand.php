@@ -83,7 +83,7 @@
                 </p>
                 <p class="">BDT <?php echo $fetch_phone_data['phone_price'] ?></p>
               </div>
-              <button class="button is-small is-primary mt-3 ">View</button>
+              <a href="./single-phone.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="button is-small is-primary mt-3 ">View</a>
             </div>
           </div>
           <!-- -- Card End -- -->
@@ -137,11 +137,7 @@
 
 
 
-
-
-    <script src="./assets/js/bulma.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="./assets/js/swiper.js"></script>
+  <?php include './enqueue_script.php'; ?>
 
 </body>
 </html>

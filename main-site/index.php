@@ -92,6 +92,6 @@ include './db/db.php';
 
 
 
-  <?php include './enqueue_script.php' ?>
+  <?php include './enqueue_script.php'; ?>
 </body>
 </html>
