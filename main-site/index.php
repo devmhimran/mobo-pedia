@@ -90,7 +90,16 @@ include './db/db.php';
 
 
 
+<script>
+  
+  $(document).ready(function() {
 
+$("#server").click(function() {
+  $("#server-content").toggle();
+});
+});
+
+</script>
 
   <?php include './enqueue_script.php'; ?>
 </body>
