@@ -6,21 +6,22 @@
     $valid[] ='';
     if(isset($_POST['phone_submit'])){
 
-        $phone_name = $_POST['phone_name'];
-        $phone_brand = $_POST['phone_brand'];
-        $phone_os = $_POST['phone_os'];
-        $phone_screen = $_POST['phone_screen'];
-        $phone_res = $_POST['phone_res'];
-        $phone_ram = $_POST['phone_ram'];
-        $phone_rom = $_POST['phone_rom'];
-        $phone_cam_primary = $_POST['phone_cam_primary'];
-        $phone_cam_secondary = $_POST['phone_cam_secondary'];
-        $phone_battery = $_POST['phone_battery'];
-        $phone_img = $_FILES['phone_img'];
-        $phone_price = $_POST["phone_price"];
+             $phone_name = $_POST['phone_name'];
+            $phone_brand = $_POST['phone_brand'];
+             $phone_os = $_POST['phone_os'];
+             $phone_screen = $_POST['phone_screen'];
+             $phone_res = $_POST['phone_res'];
+             $phone_ram = $_POST['phone_ram'];
+             $phone_rom = $_POST['phone_rom'];
+             $phone_cam_primary = $_POST['phone_cam_primary'];
+             $phone_cam_secondary = $_POST['phone_cam_secondary'];
+            $phone_battery = $_POST['phone_battery'];
+            $phone_img = $_FILES['phone_img'];
+            $phone_price = $_POST["phone_price"];
+        $phone_processor = $_POST["phone_processor"];
 
 
-        if(empty($phone_name) || empty($phone_brand) || empty($phone_os) || empty($phone_screen) || empty($phone_res) || empty($phone_ram) || empty($phone_rom) || empty($phone_cam_primary) || empty($phone_cam_secondary) || empty($phone_battery) || empty($phone_img) || empty($phone_price)){
+        if(empty($phone_name) || empty($phone_brand) || empty($phone_os) || empty($phone_screen) || empty($phone_res) || empty($phone_ram) || empty($phone_rom) || empty($phone_cam_primary) || empty($phone_cam_secondary) || empty($phone_battery) || empty($phone_img) || empty($phone_price) || empty($phone_processor)){
             $valid[] = "<p class='alert alert-danger px-5 p-3'>All Fields Required</p>";      
         }else{
 
@@ -30,7 +31,7 @@
             $photo_data = $data['file_name'];
             if ( $data['status'] == 'yes' ) {
 
-                $sql = "INSERT INTO phone (phone_name, 	phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img,phone_price) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data','$phone_price')";
+                $sql = "INSERT INTO phone (phone_name, 	phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img,phone_price,phone_processor) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data','$phone_price','$phone_processor')";
                 $conn -> query($sql);
                set_msg('Successfully Published');
                header("location: add-phone.php");
@@ -172,6 +173,10 @@
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Resolution</label>
                             <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_res">
+                        </div>
+                        <div class="add-post-section w-50 mt-3 mb-3">
+                            <label class="h5">Processor</label>
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_processor">
                         </div>
                         <h3>Memory</h3>
                         <hr>

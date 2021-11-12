@@ -80,10 +80,10 @@ include './db/function.php';
                                    </div>
                             </div>
                             <div class="column">
-                                   <img class="single-phone-icon" src="./assets/img/mobopedia-primary-camera.png" alt="">
+                                   <img class="single-phone-icon" src="./assets/img/mobopedia-cpu.png" alt="">
                                    <div class="phone-info">
                                        <strong>Processor</strong>
-                                       <p class="mt-2">MediaTek Helio G80</p>
+                                       <p class="mt-2"><?php echo $fetch_phone_data['phone_processor'] ?></p>
                                    </div>
                             </div>
 

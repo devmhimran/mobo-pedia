@@ -2,7 +2,7 @@
 
 include './db/db.php';
 
-$all_phone = "SELECT * FROM phone";
+$all_phone = "SELECT * FROM phone ORDER BY phone_id DESC";
 $phone_data = $conn -> query($all_phone);
 while($fetch_phone_data = $phone_data -> fetch_assoc()):
 
