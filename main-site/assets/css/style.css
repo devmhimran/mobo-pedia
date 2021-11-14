@@ -180,3 +180,42 @@ body {
   z-index: 999;
 	/* background: ; */
 }
+.comment-box{
+  /* width: 80%; */
+}
+.user-icon{
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  color: black;
+  font-size: 22px;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 50%;
+}
+.main-comment{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px 0;
+}
+.comment-details {
+  margin-left: 15px;
+}
+.comment-details h2{
+  font-size: 18px;
+  font-weight: 600;
+}
+.comment-time{
+  color: #636e72;
+  font-size: 14px;
+}
+.comment-details p{
+  margin-top: 10px;
+  font-size: 16px;
+}
+.comment-heading {
+  font-size: 32px;
+  font-weight: 600;
+}

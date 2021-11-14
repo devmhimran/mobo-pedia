@@ -8,6 +8,35 @@ include './db/function.php';
     $phone_data = $conn -> query($phone);
     $fetch_phone_data = $phone_data -> fetch_assoc();
 
+    $phone_id = $fetch_phone_data['phone_id'];
+    if(isset($_POST['comment_submit'])){
+      $name = $_POST['name'];
+      $email = $_POST['email'];
+      $comment_text = $_POST['comment_text'];
+
+      if( empty($name) || empty($email) || empty($comment_text)){
+        $valid_msg = '<p class="has-text-danger" id="my-form-status">All Field Require</p>' ;
+      }else{
+        $sql =  "INSERT INTO comment (name, email, comment_text, phone_id) values ('$name', '$email', '$comment_text', '$phone_id')";
+        $conn -> query($sql);
+        set_msg('Successfully Published');
+        header("Location:single-phone.php?id= $phone_id");
+
+      }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>
 
@@ -157,7 +186,75 @@ include './db/function.php';
         </div>
     </div>
 </section>
+<section class="fourth-section m-6">
+<div class="container">
 
+    <div class="card p-5 ">
+    <h2 class="comment-heading p-5">Comments</h2>
+        <!-- user comment start -->
+        <?php
+
+            $all_comment = "SELECT * FROM comment WHERE phone_id = '$phone_id' ORDER BY comment_id DESC";
+            $comment_data = $conn -> query($all_comment);
+            while($fetch_comment_data = $comment_data -> fetch_assoc()):
+
+        
+        ?>
+        <div class="all-comment mt-2 ml-6">
+            <div class="main-comment my-1">
+                <div class="user-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="comment-details">
+                    <h2><?php echo $fetch_comment_data['name'] ?></h2>
+                    <small class="comment-time">
+                        <?php 
+                            date_default_timezone_set('Asia/Dhaka'); 
+                            $post_time = $fetch_comment_data['created_at'];
+                            echo time_ago($post_time);   
+                        ?>
+                    </small>
+                    <p><?php echo $fetch_comment_data['comment_text'] ?></p>
+                </div>
+            </div>
+        </div>
+        <!-- user comment end -->
+        <?php endwhile; ?>
+        <div class="comment-box  m-6">
+            <form action="" method="POST">
+            <div class="field">
+            <div class="block">
+                <div class="field my-4">                    
+                    <input class="input is-primary" type="text" placeholder="Name"  name="name">                   
+                </div>
+                <div class="field my-4">
+                    <div class="control  has-icons-left has-icons-right">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope fa-xs"></i>
+                        </span>
+                        <input class="input is-primary" type="email" placeholder="Email" name="email">
+                    </div>
+                </div>
+                
+                <div class="field my-4">
+                    <textarea class="textarea is-primary" placeholder="Enter Comment" name="comment_text"></textarea>
+                </div>
+                <div class="field my-2">
+                    <input type="submit" class="button is-primary" value="Submit" name="comment_submit">
+                </div>
+            </div>
+          </div>
+          <?php 
+            if(isset($valid_msg)){
+                echo $valid_msg ;
+            }
+           get_msg();
+           ?>
+            </form>
+        </div>
+    </div>
+    </div>
+</section>
 
 
 

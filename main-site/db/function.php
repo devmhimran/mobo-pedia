@@ -83,3 +83,20 @@
      }  
    }  
  }  
+
+
+
+
+
+   // Message Fucntion Start
+// -------------------------------
+function set_msg($msg){
+    setcookie('msg',$msg,time()+7);
+   }
+
+
+function get_msg(){
+    if (isset($_COOKIE['msg'])) {
+      echo '<p class="has-text-primary" id="my-form-status">' .$_COOKIE['msg'].'</p>';
+    }
+  }
