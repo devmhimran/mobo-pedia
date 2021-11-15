@@ -39,22 +39,22 @@
                         <div class="field has-addons">
 
                             <div class="control">
-                              <input class="input" id="search" type="text" name="search" placeholder="Find a repository" autocomplete="off" >
+                              <input class="input" id="search" type="text" name="search" placeholder="Search Phone" autocomplete="off" >
                             </div>
                             <div class="control">
                                 <input type="submit" class="button " value="Search" name="search_btn">
                             </div>
                             
                               <div class="search-panel">   
-                                <div class="card">
-                                  <a href="#"  id="show-list">
+                                <div class="card" id="show-list">
+                                  <!-- <a href="#"  >
                                     <div class="search-list p-4">
                                                        
                                       <img src="../assets/phone_img/6dfd8b79da207e9f6cceae34cca445f4.jpg" alt="">
                                       <p class="ml-3">name</p>
                                                         
                                     </div>
-                                  </a>
+                                  </a> -->
 
                                 </div>
                               </div>

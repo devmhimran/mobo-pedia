@@ -10,8 +10,7 @@
 
     if ($result) {
       foreach ($result as $row) {
-        echo '<div class="card">
-                <a href="#">
+        echo '<a href="#"  >
                   <div class="search-list p-4">
                                      
                     <img src="../assets/phone_img/'.$row['phone_img'].'" alt="">
@@ -19,10 +18,10 @@
                                       
                   </div>
                 </a>
-              </div>';
+               ';
       }
     } else {
-      echo '<p class="list-group-item border-1">No Record</p>';
+      echo '<p class="p-5">No Record</p>';
     }
   }
 ?>
