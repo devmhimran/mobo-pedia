@@ -1,7 +1,7 @@
 <div class="preloader js-preloader flex-center">
 	<img src="./assets/img/preloader.gif">
 </div>
-<section class="first-section">
+ <section class="first-section">
       <div class="container py-3">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
@@ -34,18 +34,34 @@
                     </div>
                   </div>
 
-                    <div class="navbar-item mx-2">
+                    <form action="search.php" method="POST">
+                      <div class="navbar-item mx-2">
                         <div class="field has-addons">
+
                             <div class="control">
-                              <input class="input"  type="text" placeholder="Find a repository">
+                              <input class="input" id="search" type="text" name="search" placeholder="Find a repository" autocomplete="off" >
                             </div>
                             <div class="control">
-                              <a class="button ">
-                                Search
-                              </a>
+                                <input type="submit" class="button " value="Search" name="search_btn">
                             </div>
+                            
+                              <div class="search-panel">   
+                                <div class="card">
+                                  <a href="#"  id="show-list">
+                                    <div class="search-list p-4">
+                                                       
+                                      <img src="../assets/phone_img/6dfd8b79da207e9f6cceae34cca445f4.jpg" alt="">
+                                      <p class="ml-3">name</p>
+                                                        
+                                    </div>
+                                  </a>
+
+                                </div>
+                              </div>
+
                           </div>
                     </div>
+                  </form>
               </div>
             </div>
           </nav>

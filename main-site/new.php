@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include './enqueue_style.php' ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 
-<div class="preloader js-preloader flex-center">
-	<img src="./assets/img/preloader.gif">
-</div>
-<div class="preloader js-preloader flex-center">
-	<img src="./assets/img/preloader.gif">
-</div>
-<section class="first-section">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AutoComplete Search Using Bootstrap 4, PHP, PDO - MySQL & Ajax</title>
+  <?php include './enqueue_style.php' ?>
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"> -->
+
+</head>
+
+<body class="bg-info">
+
+    <section class="first-section">
       <div class="container py-3">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
@@ -48,50 +46,31 @@
                     </div>
                   </div>
 
-                    <div class="navbar-item mx-2">
+                    <form action="search.php" method="POST">
+                      <div class="navbar-item mx-2">
                         <div class="field has-addons">
+
                             <div class="control">
-                              <input class="input"  type="text" placeholder="Find a repository">
+                              <input class="input" id="search" type="text" name="search" placeholder="Find a repository" autocomplete="off" >
                             </div>
                             <div class="control">
-                              <a class="button ">
-                                Search
-                              </a>
+                                <input type="submit" class="button " value="Search" name="search_btn">
                             </div>
                             
-                              <div class="search-panel">
-                                <div class="card p-4">
-                                    <div class="search-list">
-                                        <img src="../assets/phone_img/6dfd8b79da207e9f6cceae34cca445f4.jpg" alt="">
-                                        <p>Xioami Phone</p>
-                                    </div>
-                                </div>
-                            
-                            </div>
+                              <div class="search-panel" id="show-list">   
+                              </div>
+
                           </div>
                     </div>
+                  </form>
               </div>
             </div>
           </nav>
     </div>
     </section>
-
-
-
-
-
-    <?php include './enqueue_script.php'; ?>
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./search.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-                            
