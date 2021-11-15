@@ -25,7 +25,7 @@ include './db/db.php';
       <div class="swiper-slide"><img src="./assets/img/Banner-1.png" alt=""></div>
       <div class="swiper-slide"><img src="./assets/img/Banner-2.png" alt=""></div>
       <div class="swiper-slide"><img src="./assets/img/Banner-3.png" alt=""></div>
-      <div class="swiper-slide"><img src="./assets/img/banner-4.jpg" alt=""></div>
+      <div class="swiper-slide"><img src="./assets/img/Banner-4.png" alt=""></div>
     </div>
     <div class="swiper-pagination"></div>
   </div>
