@@ -219,3 +219,16 @@ body {
   font-size: 32px;
   font-weight: 600;
 }
+.field{
+  position: relative;
+}
+.search-panel{
+  position: absolute;
+  width: 100%;
+  top: 125%;
+}
+
+.search-list{
+  display: flex;
+
+}
