@@ -144,16 +144,17 @@
                             <tbody>
                             
                             <?php
-                                $all_category_name = "SELECT * FROM post_category";
+                                $i = 1;
+                                $all_category_name = "SELECT * FROM post_category ORDER BY category_id DESC";
                                 $category_data = $conn -> query($all_category_name);
                                 while($fetch_category_data = $category_data -> fetch_assoc()):
                             ?>
 
                               <tr>
-                                <th scope="row"><?php echo $fetch_category_data['category_id']?></th>
+                                <th scope="row"><?php echo $i; $i++; ?></th>
                                 <td><?php echo $fetch_category_data['category_name'] ?></td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-primary btn-sm">View</a>
+                                    <a href="./main-site/single-category.php?id=<?php echo $fetch_category_data['category_id'] ?>" class="btn btn-outline-primary btn-sm">View</a>
                                     <a href="post-category-update.php?id=<?php echo $fetch_category_data['category_id']?>" class="btn btn-outline-warning btn-sm">Update</a>
                                     <a id="delete_data" href="post-category-delete.php?id=<?php echo $fetch_category_data['category_id']?>" class="btn btn-outline-danger btn-sm">Delete</a>                     
                                 </td>

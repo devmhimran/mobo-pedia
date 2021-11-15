@@ -31,6 +31,9 @@
                     <a href="./brand.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i class="fas fa-tags me-2"></i>Brand
                     </a>
+                    <a href="./comment.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        <i class="fas fa-cog me-2"></i>Comment
+                    </a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i class="fas fa-cog me-2"></i>Settings
                     </a>

@@ -68,15 +68,16 @@
                     </thead>
                     <tbody>
                     <?php
-                              $all_post = "SELECT * FROM post";
-                              $post_data = $conn -> query($all_post);
-                              while($fetch_post_data = $post_data -> fetch_assoc()):
+                        $i = 1;
+                        $all_post = "SELECT * FROM post ORDER BY post_id DESC";
+                        $post_data = $conn -> query($all_post);
+                        while($fetch_post_data = $post_data -> fetch_assoc()):
                     ?>
                       <tr>
-                        <th scope="row"><?php echo $fetch_post_data['post_id'] ?></th>
+                        <th scope="row"><?php echo $i; $i++; ?></th>
                         <td colspan="2"><?php echo $fetch_post_data['post_title'] ?></td>
                         <td>
-                            <a class="btn btn-outline-primary btn-sm">View</a>
+                            <a href="./main-site/singe-post.php?id=<?php echo $fetch_post_data['post_id'] ?>" class="btn btn-outline-primary btn-sm">View</a>
                             <a class="btn btn-outline-warning btn-sm" href="all-post-update.php?id=<?php echo $fetch_post_data['post_id'] ?>">Update</a>
                             <a id="data_delete" href="all-post-delete.php?id=<?php echo $fetch_post_data['post_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>

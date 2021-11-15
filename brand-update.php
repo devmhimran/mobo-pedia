@@ -67,47 +67,7 @@
      <!-- Sidebar Start-->
      <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 main-logo fs-4 fw-bold text-uppercase border-bottom">
-                <i class="fas fa-mobile me-2"></i>Mobo Pedia</div>
-
-            <div class="list-group list-group-flush my-3">
-                <a href="./index.php" class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
-                <a href="./analytics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-chart-line me-2"></i>Analytics
-                </a>
-                <div class="dropdown">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="far fa-list-alt me-2"></i>Post
-                </a>
-                    <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
-                      <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
-                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
-                    </ul>
-                  </div>
-                  <div class="dropdown">
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="far fa-list-alt me-2"></i>Phone
-                    </a>
-                        <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton2">
-                          <li><a class="dropdown-item" href="./add-phone.php">Add Phone</a></li>
-                          <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
-                        </ul>
-                      </div>
-                    <a href="./brand.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i class="fas fa-tags me-2"></i>Brand
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i class="fas fa-cog me-2"></i>Settings
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-                        <i class="fas fa-power-off me-2"></i>Logout
-                    </a>
-            </div>
-        </div>
+        <?php include './nav.php' ?>
         <!-- Sidebar End-->
 
         <!-- Page Content -->
@@ -183,7 +143,7 @@
                             <tbody>
                             
                             <?php
-                                $all_brand_name = "SELECT * FROM brand";
+                                $all_brand_name = "SELECT * FROM brand ORDER BY id DESC";
                                 $brand_data = $conn -> query($all_brand_name);
                                 $i=1;
                                 while($fetch_brand_data = $brand_data -> fetch_assoc()):
@@ -194,7 +154,7 @@
                                 <td scope="row"><img style="width:60px;" src="./assets/brand_img/<?php echo $fetch_brand_data['brand_img']?>" alt=""></td>
                                 <td><?php echo $fetch_brand_data['brand_name'] ?></td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-primary btn-sm">View</a>
+                                    <a href="./main-site/single-brand.php?id=<?php echo $fetch_brand_data['id'] ?>" class="btn btn-outline-primary btn-sm">View</a>
                                     <a href="brand-update.php?id=<?php echo $fetch_brand_data['id']?>" class="btn btn-outline-warning btn-sm">Update</a>
                                     <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>                     
                                 </td>
@@ -202,13 +162,14 @@
                               </tr>
                               <tr>
                                 <?php endwhile; ?>
+                                </tr>
                             </tbody>
                           </table>
                     </div>
                 </div>
             </div>
             <!-- Main Content End -->
-    
+    </div>
             <?php include './footer.php'; ?>
     <script>	
         $('a#date_delete').click(function(){

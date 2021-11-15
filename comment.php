@@ -57,45 +57,47 @@
 
             
             <!-- Main Content Start -->
-            <div class="post-table m-3">
+            <div class="comment-table m-3">
                 <h2>All Phones</h2>
                 <table class="table mt-3">
                     <thead class="table-dark">
                       <tr>
-                        <th scope="col">Phone Id</th>
-                        <th scope="col" colspan="1">Phone Name</th>
+                        <th scope="col">Comment Id</th>
+                        <th scope="col" colspan="1">Name</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Photo</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Phone Name</th>
                         <th scope="col">Date</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
                     $i = 1;
-                $all_phone = "SELECT * FROM phone ORDER BY phone_id DESC";
-                $phone_data = $conn -> query($all_phone);
-                while($fetch_phone_data = $phone_data -> fetch_assoc()):
-            ?>
+                    $all_comment= "SELECT * FROM comment ORDER BY comment_id DESC";
+                    $comment_data = $conn -> query($all_comment);
+                    while($fetch_comment_data = $comment_data -> fetch_assoc()):
+                    ?>
                       <tr>
                         <th scope="row"><?php echo $i; $i++; ?></th>
-                        <td colspan="1"><?php echo $fetch_phone_data['phone_name'] ?></td>
+                        <td colspan="1"><?php echo $fetch_comment_data['name'] ?></td>
                         <td>
-                            <a href="./main-site/single-phone.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-primary btn-sm">View</a>
-                            <a href="all-phones-update.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-warning btn-sm">Update</a>
-                            <a id="date_delete" href="all-phones-delete.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="btn btn-outline-danger btn-sm">Delete</a>
+                            <a href="./main-site/single-phone.php?id=<?php echo $fetch_comment_data['phone_id'] ?>" class="btn btn-outline-primary btn-sm">View</a>
+                            <a id="date_delete" href="all-phones-delete.php?id=" class="btn btn-outline-danger btn-sm">Delete</a>
                         </td>
-                        <td><?php 
+                        
+                        <td><?php echo $fetch_comment_data['email'] ?></td>
+                        <td><?php echo   substr($fetch_comment_data['comment_text'],0,60)."[...]";?></td>
+                        <td class="comment-text"><?php 
 
-                            $brand_id =  $fetch_phone_data['phone_brand'];
-                            $brand = "SELECT brand_name FROM brand WHERE id='$brand_id'";
-                            $brand_data = $conn -> query($brand);
-                            $fetch_brand_data = $brand_data -> fetch_assoc();
-                            echo $fetch_brand_data['brand_name'];
+                            $phone_id =  $fetch_comment_data['phone_id'];
+                            $phone = "SELECT phone_name FROM phone WHERE phone_id='$phone_id'";
+                            $phone_data = $conn -> query($phone);
+                            $fetch_phone_data = $phone_data -> fetch_assoc();
+                            echo $fetch_phone_data['phone_name'];
 
                             ?></td>
-                        <td><img src="./assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="" style="width:30px;"></td>
-                        <td><?php echo $fetch_phone_data['phone_created_at'] ?></td>
+                        <td><?php echo $fetch_comment_data['created_at'] ?></td>
                       </tr>
                       <?php endwhile; ?>
 
