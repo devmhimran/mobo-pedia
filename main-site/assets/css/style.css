@@ -239,3 +239,6 @@ body {
   justify-content: center;
   align-items: center;
 }
+.phone-details p{
+  text-transform: capitalize;
+}
