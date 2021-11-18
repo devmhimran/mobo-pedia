@@ -13,6 +13,7 @@
     font-family: 'Poppins', sans-serif;
     
 }
+html { overflow: inherit}
 html,
 body {
   position: relative;
@@ -232,4 +233,9 @@ body {
 .search-list{
   display: flex;
 
+}
+.pricing-divider{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

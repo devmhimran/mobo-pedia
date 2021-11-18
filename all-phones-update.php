@@ -3,6 +3,7 @@
     include 'db/db.php';
     include 'db/function.php';
 
+    $id = $_GET['id'];
     $valid[] ='';
     if(isset($_POST['phone_submit'])){
 
@@ -29,7 +30,7 @@
             $data = photo_upload($_FILES['phone_img'],'assets/phone_img/');
             $photo_data = $data['file_name'];
             if ( $data['status'] == 'yes' ) {
-                $sql = "UPDATE phone SET phone_name = '$phone_name', phone_brand = '$phone_brand', phone_os = '$phone_os', phone_screen = '$phone_screen', phone_res = '$phone_res', phone_ram = '$phone_ram', phone_rom = '$phone_rom', phone_cam_primary = '$phone_cam_primary', phone_cam_secondary = '$phone_cam_secondary', phone_battery = '$phone_battery', phone_price = '$phone_price',phone_processor = '$phone_processor'";
+                $sql = "UPDATE phone SET phone_name = '$phone_name', phone_brand = '$phone_brand', phone_os = '$phone_os', phone_screen = '$phone_screen', phone_res = '$phone_res', phone_ram = '$phone_ram', phone_rom = '$phone_rom', phone_cam_primary = '$phone_cam_primary', phone_cam_secondary = '$phone_cam_secondary', phone_battery = '$phone_battery', phone_price = '$phone_price',phone_processor = '$phone_processor' WHERE phone_id = '$id'";
                 // $sql = "INSERT INTO phone (phone_name,   phone_brand, phone_os, phone_screen, phone_res, phone_ram, phone_rom, phone_cam_primary, phone_cam_secondary, phone_battery, phone_img) values ('$phone_name','$phone_brand','$phone_os','$phone_screen', '$phone_res', '$phone_ram', '$phone_rom', '$phone_cam_primary', '$phone_cam_secondary', '$phone_battery', '$photo_data')";
                 $conn -> query($sql);
                set_msg('Successfully Published');
@@ -38,7 +39,7 @@
         }
         
     }
-    $id = $_GET['id'];
+    
     $phone_sql = "SELECT * FROM phone WHERE phone_id='$id'";
     $phone_data = $conn -> query($phone_sql);
     $fetch_phone_data = $phone_data -> fetch_assoc();
@@ -51,7 +52,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <?php include 'enqueue.php' ?>
-    <title>Add Phone</title>
+    <title><?php echo $fetch_phone_data['phone_name'] ?></title>
 </head>
 <body>
     <!-- Sidebar Start-->
@@ -145,7 +146,7 @@
                         </div>
                         <div class="add-post-section w-50 mt-3 mb-3">
                             <label class="h5">Processor</label>
-                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_processor">
+                            <input type="text" class="form-control mt-2" id="exampleFormControlInput1" name="phone_processor" value="<?php echo $fetch_phone_data['phone_processor'] ?>">
                         </div>
                         <h3>Memory</h3>
                         <hr>

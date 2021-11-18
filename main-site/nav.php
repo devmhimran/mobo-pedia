@@ -1,5 +1,5 @@
 <div class="preloader js-preloader flex-center">
-	<img src="./assets/img/preloader.gif">
+  <img src="./assets/img/preloader.gif">
 </div>
  <section class="first-section">
       <div class="container py-3">
@@ -33,11 +33,9 @@
                       </div>
                     </div>
                   </div>
-
                     <form action="search.php" method="POST">
                       <div class="navbar-item mx-2">
                         <div class="field has-addons">
-
                             <div class="control">
                               <input class="input" id="search" type="text" name="search" placeholder="Search Phone" autocomplete="off" >
                             </div>
@@ -55,10 +53,8 @@
                                                         
                                     </div>
                                   </a> -->
-
                                 </div>
                               </div>
-
                           </div>
                     </div>
                   </form>

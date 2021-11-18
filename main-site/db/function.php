@@ -1,5 +1,13 @@
 <?php
 
+
+function old($recover){
+  if (isset($_POST[$recover])) {
+    echo $_POST[$recover];
+  }
+}
+
+
  function time_ago($timestamp)  
  {  
       $time_ago = strtotime($timestamp);  
