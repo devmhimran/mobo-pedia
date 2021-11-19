@@ -86,6 +86,12 @@ include './header.php';
             <!-- Main Content Start -->
             <canvas id="badCanvas1" width="400" height="100"></canvas>
 
+            <div class="container">
+                <h1>Comming Soon</h1>
+            </div>
+
+
+
             <!-- Main Content End -->
 
             <?php include './footer.php'; ?>
