@@ -1,9 +1,14 @@
-<?php 
+<?php
 
-include './db/db.php';
+  include './db/db.php';  
+
+    $id = $_GET['id'];
+    $brand = "SELECT * FROM brand WHERE id='$id'";
+    $brand_data = $conn -> query($brand);
+    $fetch_brand_data = $brand_data -> fetch_assoc();
 
 
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +16,7 @@ include './db/db.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include './enqueue_style.php' ?>
-    <title>Brand</title>
+    <title><?php echo $fetch_brand_data['brand_name'] ?></title>
 </head>
 <body>
     
@@ -22,9 +27,9 @@ include './db/db.php';
     <section class="second-section hero is-black py-5">
         <div class="hero-body has-text-centered	">
           <div class="container">
-            <p class="title">
-                Brands
-              </p>
+            <h1 class="title">
+                <?php echo $fetch_brand_data['brand_name'] ?>
+            </h1>
           </div>
         </div>
     </section>
@@ -51,25 +56,50 @@ include './db/db.php';
         <div class="columns">
         <?php
 
-          $all_brand = "SELECT * FROM brand";
-          $brand_data = $conn -> query($all_brand);
-          while($fetch_brand_data = $brand_data -> fetch_assoc()):
-
+            $brand_phone = "SELECT * FROM phone WHERE phone_brand='$id'";
+            $phone_data = $conn -> query($brand_phone);
+            while($fetch_phone_data = $phone_data -> fetch_assoc()):
+          
+        
         ?>
-
           <!-- -- Card Start -- -->
           <div class="column is-3">
-            <div class="card has-text-centered p-4">
+            <div class="card  p-4">
               <div class="card-image">
-                <a href='./single-brand.php?id=<?php echo $fetch_brand_data['id'] ?>'><img src="./dashboard/assets/brand_img/<?php echo $fetch_brand_data['brand_img'] ?>" alt=""></a>
+                <img src="./dashboard/assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="">
               </div>
               <div class="media-content">
-                <a href='./single-brand.php?id=<?php echo $fetch_brand_data['id'] ?>'><p class="title is-5 mt-2"><?php echo $fetch_brand_data['brand_name'] ?></p></a>
+                <p class="title is-5 mt-2"><?php echo $fetch_phone_data['phone_name'] ?></p>
+                <p class="subtitle is-6 mb-2">
+                <?php 
+
+                // $brand_id =  $fetch_phone_data['phone_brand'];
+                // $brand = "SELECT brand_name FROM brand WHERE id='$brand_id'";
+                // $brand_data = $conn -> query($brand);
+                // $fetch_brand_data = $brand_data -> fetch_assoc();
+                // echo $fetch_brand_data['brand_name'];
+                 echo $fetch_brand_data['brand_name'];
+                ?>
+                </p>
+                <p class="">BDT <?php echo $fetch_phone_data['phone_price'] ?></p>
               </div>
+              <a href="./single-phone.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="button is-small is-primary mt-3 ">View</a>
             </div>
           </div>
           <!-- -- Card End -- -->
           <?php endwhile; ?>
+          
+
+         
+
+          
+
+         
+
+         
+
+
+         
 
 
 

@@ -1,44 +1,65 @@
-<div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 main-logo fs-4 fw-bold text-uppercase border-bottom">
-                <i class="fas fa-mobile me-2"></i>Mobo Pedia</div>
-
-            <div class="list-group list-group-flush my-3">
-                <a href="./index.php" class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
-                <a href="./analytics.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-chart-line me-2"></i>Analytics
-                </a>
-                <div class="dropdown">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="far fa-list-alt me-2"></i>Post
-                </a>
-                    <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="./add-post.php">Add Post</a></li>
-                      <li><a class="dropdown-item" href="./all-post.php">All Post</a></li>
-                      <li><a class="dropdown-item" href="./post-category.php">Category</a></li>
-                    </ul>
-                  </div>
-                  <div class="dropdown">
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="far fa-list-alt me-2"></i>Phone
-                    </a>
-                        <ul class="dropdown-menu post-dropdown" aria-labelledby="dropdownMenuButton2">
-                          <li><a class="dropdown-item" href="./add-phone.php">Add Phone</a></li>
-                          <li><a class="dropdown-item" href="./all-phones.php">All Phones</a></li>
-                        </ul>
-                      </div>
-                    <a href="./brand.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i class="fas fa-tags me-2"></i>Brand
-                    </a>
-                    <a href="./comment.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i class="fas fa-cog me-2"></i>Comment
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i class="fas fa-cog me-2"></i>Settings
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-                        <i class="fas fa-power-off me-2"></i>Logout
-                    </a>
+<div class="preloader js-preloader flex-center">
+  <img src="./assets/img/preloader.gif">
+</div>
+ <section class="first-section">
+      <div class="container py-3">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="./index.php">
+                <img class='site-logo' src="./assets/img/mobo-pedia.png" width="112" height="28">
+              </a>
+          
+              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
             </div>
-        </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-end">
+                <div class="navbar-start">
+                    <a href="./index.php" class="navbar-item mx-2">Home</a>
+              
+                    <a href="./brand.php" class="navbar-item mx-2">Brand</a>
+                    <a href="./all-phones.php" class="navbar-item mx-2">All Phones</a>
+                    <a href="./suggesions.php" class="navbar-item mx-2">Sugessions</a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link mx-2">Blog</a>
+                    <div class="navbar-dropdown">
+                        <a href="./post-category.php" class="navbar-item">Blog Category</a>
+                        <a href="./all_post.php" class="navbar-item">Latest Post <span class="tag is-link ml-3">New</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                    <form action="search.php" method="POST">
+                      <div class="navbar-item mx-2">
+                        <div class="field has-addons">
+                            <div class="control">
+                              <input class="input" id="search" type="text" name="search" placeholder="Search Phone" autocomplete="off" >
+                            </div>
+                            <div class="control">
+                                <input type="submit" class="button " value="Search" name="search_btn">
+                            </div>
+                            
+                              <div class="search-panel">   
+                                <div class="card" id="show-list">
+                                  <!-- <a href="#"  >
+                                    <div class="search-list p-4">
+                                                       
+                                      <img src="../assets/phone_img/6dfd8b79da207e9f6cceae34cca445f4.jpg" alt="">
+                                      <p class="ml-3">name</p>
+                                                        
+                                    </div>
+                                  </a> -->
+                                </div>
+                              </div>
+                          </div>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </nav>
+    </div>
+    </section>
