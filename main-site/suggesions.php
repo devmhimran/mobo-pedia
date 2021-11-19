@@ -55,8 +55,8 @@ include './db/function.php';
       <div class="column">
           <div class="select is-primary">
             <select name="processor">
-              <option  value="<?php old('processor'); ?>">Select Processor</option>
-              <option value="snapdragon">Snapdragon</option>
+              <option >Select Processor</option>
+              <option selected value="snapdragon">Snapdragon</option>
               <option value="mediatek">MediaTek</option>
               <option value="exynos">Exynos</option>
               <option value="kirin">Kirin</option>
@@ -107,9 +107,10 @@ include './db/function.php';
               $phone_brand_data = $conn -> query($phone_brand);
               $fetch_phone_brand_data = $phone_brand_data -> fetch_assoc();
               echo $fetch_phone_brand_data['brand_name'];
-              ?> > 
-              <strong> Phone Soc : </strong> <?php echo $processor ?> > <strong> Phone Price Range : </strong> <?php echo $price_input_2 ?> To  <?php echo $price_input_2 ?></p>
-              <?php            }
+              ?>  >  
+              <strong> Phone Soc : </strong> <?php echo $processor ?>  >  <strong> Phone Price Range : </strong> <?php echo $price_input_2 ?> To  <?php echo $price_input_2 ?></p>
+              <?php            
+            }
   
   ?>
   
@@ -124,7 +125,7 @@ include './db/function.php';
 
 
 
-    <div class="column is-12">
+    <div class="column is-12 py-6">
       <div class="block">
         <div class="columns">
         <?php
@@ -136,39 +137,42 @@ include './db/function.php';
               $price_input_1 = $_POST['price_range_1'];
               $price_input_2 = $_POST['price_range_2'];
 
-              $brand_phone = "SELECT * FROM phone WHERE phone_brand='$brand' AND phone_price BETWEEN $price_input_1 AND $price_input_2";
+              $brand_phone = "SELECT * FROM phone WHERE phone_brand='$brand' AND phone_processor LIKE '%$processor%' AND phone_price BETWEEN $price_input_1 AND $price_input_2";
               $phone_data = $conn -> query($brand_phone);
-              while($fetch_phone_data = $phone_data -> fetch_assoc()){
+              if ( $phone_data -> num_rows == 1 ) {
+                while($fetch_phone_data = $phone_data -> fetch_assoc()){
                 ?>
-
                   <!-- -- Card Start -- -->
-          <div class="column is-3">
-            <div class="card  p-4">
-              <div class="card-image">
-                <img src="../assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="">
-              </div>
-              <div class="media-content">
-                <p class="title is-5 mt-2"><?php echo $fetch_phone_data['phone_name'] ?></p>
-                <p class="subtitle is-6 mb-2">
-                <?php 
+                  <div class="column is-3">
+                    <div class="card  p-4">
+                      <div class="card-image">
+                        <img src="../assets/phone_img/<?php echo $fetch_phone_data['phone_img'] ?>" alt="">
+                      </div>
+                      <div class="media-content">
+                        <p class="title is-5 mt-2"><?php echo $fetch_phone_data['phone_name'] ?></p>
+                        <p class="subtitle is-6 mb-2">
+                        <?php 
 
-                $brand_id =  $fetch_phone_data['phone_brand'];
-                $brand = "SELECT brand_name FROM brand WHERE id='$brand_id'";
-                $brand_data = $conn -> query($brand);
-                $fetch_brand_data = $brand_data -> fetch_assoc();
-                echo $fetch_brand_data['brand_name'];
-                ?>
-                </p>
-                <p class="">BDT <?php echo $fetch_phone_data['phone_price'] ?></p>
-              </div>
-              <a href="./single-phone.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="button is-small is-primary mt-3 ">View</a>
-            </div>
-          </div>
-          <!-- -- Card End -- -->
+                        $brand_id =  $fetch_phone_data['phone_brand'];
+                        $brand = "SELECT brand_name FROM brand WHERE id='$brand_id'";
+                        $brand_data = $conn -> query($brand);
+                        $fetch_brand_data = $brand_data -> fetch_assoc();
+                        echo $fetch_brand_data['brand_name'];
+                        ?>
+                        </p>
+                        <p class="">BDT <?php echo $fetch_phone_data['phone_price'] ?></p>
+                      </div>
+                      <a href="./single-phone.php?id=<?php echo $fetch_phone_data['phone_id'] ?>" class="button is-small is-primary mt-3 ">View</a>
+                    </div>
+                  </div>
+                  <!-- -- Card End -- -->
 
                 <?php
               }
           
+              }else{
+                echo "<h1 class='is-size-1 py-5 has-text-centered'>Not Found</h1>";
+              }
             }
         ?>
           
