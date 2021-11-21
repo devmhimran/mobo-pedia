@@ -108,7 +108,7 @@ include './db/function.php';
               $fetch_phone_brand_data = $phone_brand_data -> fetch_assoc();
               echo $fetch_phone_brand_data['brand_name'];
               ?>  >  
-              <strong> Phone Soc : </strong> <?php echo $processor ?>  >  <strong> Phone Price Range : </strong> <?php echo $price_input_2 ?> To  <?php echo $price_input_2 ?></p>
+              <strong> Phone Soc : </strong> <?php echo $processor ?>  >  <strong> Phone Price Range : </strong> <?php echo $price_input_1 ?> To  <?php echo $price_input_2 ?></p>
               <?php            
             }
   
