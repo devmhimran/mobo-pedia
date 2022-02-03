@@ -56,7 +56,7 @@ include './db/function.php';
           <div class="select is-primary">
             <select name="processor">
               <option >Select Processor</option>
-              <option selected value="snapdragon">Snapdragon</option>
+              <option value="snapdragon">Snapdragon</option>
               <option value="mediatek">MediaTek</option>
               <option value="exynos">Exynos</option>
               <option value="kirin">Kirin</option>
